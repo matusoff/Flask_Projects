@@ -1,0 +1,42 @@
+Place index.html in the folder 'templates'
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Color Extractor</title>
+  </head>
+  <body>
+    <h1>Color Extractor</h1>
+    <p>Upload an image to extract its top 10 colors.</p>
+    <form action="/color-extractor" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*">
+      <button type="submit">Extract Colors</button>
+    </form>
+    <img id="image-preview" src="#" alt="Image preview" style="max-width: 200px;">
+    <div id="colors"></div>
+    <script>
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const img = document.querySelector('#image-preview');
+        img.src = URL.createObjectURL(formData.get('image'));
+        const response = await fetch('/color-extractor', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await response.json();
+        const colorsDiv = document.querySelector('#colors');
+        colorsDiv.innerHTML = `<h2>Top 10 Colors</h2>`;
+        for (let i = 0; i < data.colors.length; i++) {
+          const color = data.colors[i];
+          const percentage = data.percentages[i];
+          colorsDiv.innerHTML += `
+            <div style="background-color: ${color}; width: 50px; height: 50px; display: inline-block;"></div>
+            <span>${percentage}%</span><br>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html> 
