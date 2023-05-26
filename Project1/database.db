@@ -1,0 +1,50 @@
+import sqlite3 
+#Open database
+conn = sqlite3.connect(r'C:\DATA\PHYTON COURSE\StudioVisual Code\PROJECTS\100days_of_code\Day96\database2.db')
+
+
+'''
+Next up we want to fill this database with mock data, we will use the following commands to fill this database up 
+(keep in mind you can always change these datasets, but you might have to change other areas of this project as well):
+
+'''
+
+#Create table
+conn.execute('''CREATE TABLE users 
+  (userId INTEGER PRIMARY KEY, 
+  password TEXT,
+  email TEXT,
+  firstName TEXT,
+  lastName TEXT,
+  address1 TEXT,
+  address2 TEXT,
+  zipcode TEXT,
+  city TEXT,
+  state TEXT,
+  country TEXT, 
+  phone TEXT
+  )''')
+conn.execute('''CREATE TABLE products
+  (productId INTEGER PRIMARY KEY,
+  name TEXT,
+  price REAL,
+  description TEXT,
+  image TEXT,
+  stock INTEGER,
+  categoryId INTEGER,
+  FOREIGN KEY(categoryId) REFERENCES categories(categoryId)
+  )''')
+conn.execute('''CREATE TABLE kart
+  (userId INTEGER,
+  productId INTEGER,
+  FOREIGN KEY(userId) REFERENCES users(userId),
+  FOREIGN KEY(productId) REFERENCES products(productId)
+  )''')
+conn.execute('''CREATE TABLE categories
+  (categoryId INTEGER PRIMARY KEY,
+  name TEXT
+  )''')
+
+# Add new column to the kart table
+conn.execute("ALTER TABLE kart ADD COLUMN quantity INTEGER DEFAULT 0")
+conn.close()
