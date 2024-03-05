@@ -35,10 +35,10 @@ To explore and run the projects, follow these general steps. Specific instructio
 ### Set Up a Virtual Environment (Recommended)
 
 Create a virtual environment to manage dependencies for a project:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
+      ```bash
+      python -m venv venv
+      source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+      ```
 
 ### Acknowledgments
 - The Flask community and contributors for creating and maintaining such a powerful and easy-to-use framework.
