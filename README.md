@@ -1,5 +1,3 @@
-# Flask_Projects
-
 # Flask Projects
 
 This repository is a compilation of various web applications and APIs I've developed using Flask, a lightweight WSGI web application framework in Python. These projects range from simple web apps to more complex RESTful APIs, showcasing the versatility and power of Flask in web development.
